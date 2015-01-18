@@ -29,7 +29,6 @@ public class MainActivity extends Activity {
 	}
 	
     public void startBtn(View v) {
-      Log.d("startBtn", "押された！？");
       Intent measure = new Intent(MainActivity.this,MeasureActivity.class);
       startActivity(measure);
      }
