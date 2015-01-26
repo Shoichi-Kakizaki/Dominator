@@ -2,6 +2,7 @@ package com.shoichi.dominator;
 
 import java.io.IOException;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.Face;
@@ -9,17 +10,20 @@ import android.hardware.Camera.Size;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
+import android.view.ViewGroup.LayoutParams;
 import android.view.SurfaceView;
 
 
 @SuppressWarnings("deprecation")
 public class CameraPreview extends SurfaceView implements Callback,Camera.FaceDetectionListener  {
 	private Camera camera;
+	private Activity parent;
 	
 	public CameraPreview(Context context) {
 		super(context);
 		SurfaceHolder holder = getHolder();
 		holder.addCallback(this);
+		parent = (Activity)context;
 		//holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 	}
 
@@ -61,6 +65,8 @@ public class CameraPreview extends SurfaceView implements Callback,Camera.FaceDe
 		Log.d("camera", "顔検出メソッド");
 		if (faces.length > 0) {
 			Log.w("FaceDetection", faces.length + " faces");
+			 // MeasureActivityにてaddPermeabilityViewを呼んでいるので、インスタンス変数を参照出来る
+			((MeasureActivity)parent).addPermeabilityView(faces);
 		}
 	}
 
