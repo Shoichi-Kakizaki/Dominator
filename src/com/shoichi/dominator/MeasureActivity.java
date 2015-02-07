@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 public class MeasureActivity extends Activity {
 	private CameraPermeabilityView permeabilityView;
+	private CameraCoefficientView coefficientView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +28,12 @@ public class MeasureActivity extends Activity {
 
       //オーバーレイ用のViewを追加
       CameraPermeabilityView  CameraPermeabilityView = new CameraPermeabilityView(this);
+      CameraCoefficientView CameraCoefficientView = new CameraCoefficientView(this);
       //自分自身を追加
       this.permeabilityView = CameraPermeabilityView;
+      this.coefficientView = CameraCoefficientView;
       addContentView(CameraPermeabilityView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+      addContentView(CameraCoefficientView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 	}
 
 	@Override
@@ -40,5 +44,6 @@ public class MeasureActivity extends Activity {
 	//addPermeabilityViewをCameraPreviewから呼べるように
 	public void addPermeabilityView(Face[] faces) {
 		this.permeabilityView.setFaces(faces);
+		this.coefficientView.setFaces(faces);
 	}
 } 
